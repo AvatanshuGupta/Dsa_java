@@ -2,8 +2,12 @@
 
 public class LL {
 
-    Node head;  // defining a head node
+    private Node head;  // defining a head node
     private int size; // defining size of linked list
+
+    LL(){  // initializing size as zero inside constructor
+        this.size=0;
+    }
 
     class Node{
     String data; // Data to be stored at a node
@@ -12,6 +16,7 @@ public class LL {
     Node(String data){  // Constructor for node class
         this.data=data;
         this.next=null;
+        size ++;    // increment size when new node is created
 
     }
 
@@ -36,7 +41,7 @@ public class LL {
         }
 
         Node currNode=head;
-        while(currNode.next != null){
+        while(currNode.next != null){ // Trav
             currNode=currNode.next;
         }
         currNode.next=newNode;
@@ -58,10 +63,47 @@ public class LL {
         System.out.println("NULL");
     }
 
+    public void deleteFirst(){
+        if(head==null){
+            System.out.println("list is empty");
+            return ;
+        }
+        size --; // decrement when node deleted
+        head=head.next; // make the second node as the head
+    }
+
+    public void deleteLast(){
+        if(head==null){
+            System.out.println("list is empty");
+            return ;
+        }
+
+        size --;   // decrement when node deleted
+
+        if(head.next==null){ // handle edge case when linked list have only one element
+            head=null;
+            return ;
+        }
+
+        Node secondLast=head;
+        Node last=head.next;
+
+        while(last.next != null){
+            secondLast=secondLast.next;
+            last=last.next;
+        }
+
+        secondLast.next=null;
+    }
+
+    public int getSize(){
+        return size;
+    }
+
     }
 
     public static void main(String[] args) {
-        
+        LL list=new LL();
     }
 }
 
